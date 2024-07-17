@@ -1,6 +1,8 @@
 MIT License
 
-Copyright (c) 2024 Nilay Singh
+Note: this projects depends of Polotno SDK, which is licensed differently. See [Polotno SDK license](https://polotno.com/license) for more details.
+
+Original work Copyright (C) 2020 - preset by Anton Lavrenov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
