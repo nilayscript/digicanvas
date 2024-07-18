@@ -1,0 +1,95 @@
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.no-scrollbar {
+  -webkit-overflow-scrolling: touch;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  display: none;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+  display: none;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.ant-select-focused .ant-select-selector,
+.ant-select-selector:focus,
+.ant-select-selector:active,
+.ant-select-open .ant-select-selector {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.ant-input:focus {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.ant-input-number-focused {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.ant-input-number-input-wrap {
+  margin-top: 4px !important;
+}
+
+.ant-input-number .ant-input-number-handler-up-inner svg,
+.ant-input-number .ant-input-number-handler-down-inner svg {
+  color: white !important;
+}
+
+.ant-select-dropdown {
+  background: #454d59 !important;
+}
+.ant-picker-dropdown .ant-picker-year-panel,
+.ant-picker-dropdown .ant-picker-year-panel,
+.ant-picker-dropdown .ant-picker-panel-container .ant-picker-panel-layout,
+.ant-picker-dropdown .ant-picker-datetime-panel {
+  background: #454d59 !important;
+}
+.ant-picker-outlined:focus-within {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.ant-picker-dropdown .ant-picker-header-view button,
+.ant-picker-dropdown .ant-picker-header-view {
+  color: white !important;
+}
+.ant-picker-dropdown .ant-picker-header-view button:hover {
+  color: white !important;
+}
+
+.ant-tabs-nav-list .ant-tabs-tab {
+  width: 150px;
+  justify-content: center;
+}
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-list {
+  width: 100% !important;
+}
+/* .ant-tabs .ant-tabs-tab {
+  padding: 0px !important;
+} */
+
+.ant-tabs-ink-bar {
+  height: 5px;
+}
+.ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar {
+  display: none !important;
+}
+.ant-tabs-top > .ant-tabs-nav::before {
+  display: none !important;
+}
+.ant-tabs .ant-tabs-tab-btn {
+  color: #abb3bf !important;
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #fff !important;
+}

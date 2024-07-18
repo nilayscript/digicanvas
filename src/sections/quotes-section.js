@@ -77,22 +77,8 @@ export const QuotesPanel = observer(({ store }) => {
     };
   }, [query, keywords]);
 
-
-  const handleAddText = () => {
-    store.activePage.addElement({
-      x: 0,
-      y: 0,
-      type: "html",
-      html: `<!DOCTYPEhtml><htmllang="en"><head><metacharset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1.0"></head><body><div style="width:100%;height:8rem;background-color:red;display:flex;align-items:center;justify-content:center;overflow:hidden;"><marquee scrollAmount=10 style="color:yellow;font-size:'14px'
-        };font-weight:400;">Hello</marquee></div></body></html>`,
-      width: 100,
-      height: 50,
-    });
-  }
-
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <h1 onClick={handleAddText}>Hello</h1>
       <InputGroup
         leftIcon="search"
         placeholder="Search..."

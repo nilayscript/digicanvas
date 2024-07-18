@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
+import { ConfigProvider } from 'antd';
+import { Provider } from 'react-redux';
 import { createStore } from 'polotno/model/store';
 import { unstable_setAnimationsEnabled } from 'polotno/config';
 import { Auth0Provider } from '@auth0/auth0-react';
@@ -10,18 +11,7 @@ import './index.css';
 import App from './App';
 import './logger';
 import { ErrorBoundary } from 'react-error-boundary';
-
-if (window.location.host !== 'studio.polotno.com') {
-  console.log(
-    `%cWelcome to Polotno Studio! Thanks for your interest in the project!
-This repository has many customizations from the default version Polotno SDK.
-I don't recommend to use it as starting point. 
-Instead, you can start from any official demos, e.g.: https://polotno.com/docs/full-canvas-editor 
-or direct sandbox: https://codesandbox.io/s/github/polotno-project/polotno-site/tree/source/examples/polotno-demo?from-embed.
-But feel free to use this repository as a reference for your own project and to learn how to use Polotno SDK.`,
-    'background: rgba(54, 213, 67, 1); color: white; padding: 5px;'
-  );
-}
+import { store as reduxStore } from './redux/app/store';
 
 unstable_setAnimationsEnabled(true);
 
@@ -44,6 +34,7 @@ const ID = isLocalhost ? LOCAL_ID : PRODUCTION_ID;
 const REDIRECT = isLocalhost
   ? 'http://localhost:3000'
   : 'https://studio.polotno.com';
+
 
 function Fallback({ error, resetErrorBoundary }) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
@@ -79,10 +70,51 @@ root.render(
       }
     }}
   >
-    <ProjectContext.Provider value={project}>
-      <Auth0Provider domain={AUTH_DOMAIN} clientId={ID} redirectUri={REDIRECT}>
-        <App store={store} />
-      </Auth0Provider>
-    </ProjectContext.Provider>
+    <Provider store={reduxStore}>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: '#454D59',
+            colorLink: '#454D59',
+            fontFamily: 'Inter',
+            colorTextPlaceholder: '#abb3bf',
+          },
+          components: {
+            Select: {
+              colorBgContainer: '#454D59',
+              colorBorder: 'transparent',
+              colorText: '#fff',
+              optionSelectedBg: '#454D59',
+              optionSelectedColor: '#fff',
+            },
+            Input: {
+              colorBgContainer: '#454D59',
+              colorBorder: 'transparent',
+              colorText: '#fff',
+            },
+            InputNumber: {
+              colorBgContainer: '#454D59',
+              colorBorder: 'transparent',
+              colorText: '#fff',
+            },
+            Button: {
+              colorBorder: 'transparent',
+              colorText: '#fff',
+            },
+            DatePicker: {
+              colorBgContainer: '#454D59',
+              colorBorder: 'transparent',
+              colorText: '#fff',
+            },
+          },
+        }}
+      >
+        <ProjectContext.Provider value={project}>
+          <Auth0Provider domain={AUTH_DOMAIN} clientId={ID} redirectUri={REDIRECT}>
+            <App store={store} />
+          </Auth0Provider>
+        </ProjectContext.Provider>
+      </ConfigProvider>
+    </Provider>
   </ErrorBoundary>
 );

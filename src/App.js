@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import { observer } from 'mobx-react-lite';
 import { Spinner } from '@blueprintjs/core';
 
@@ -13,17 +13,26 @@ import { setTranslations } from 'polotno/config';
 
 import { loadFile } from './file';
 
-import { QrSection } from './sections/qr-section';
 import { QuotesSection } from './sections/quotes-section';
-import { TickerSection } from './sections/ticker-section';
+import { MediaSection } from './sections/media-section';
 import { IconsSection } from './sections/icons-section';
 import { ShapesSection } from './sections/shapes-section';
 import { StableDiffusionSection } from './sections/stable-diffusion-section';
 import { MyDesignsSection } from './sections/my-designs-section';
 
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    setEditClock,
+    setEditCountdown,
+    setEditEmbed,
+    setEditQr,
+    setEditTicker,
+    setEditWeather,
+    setEditWeblink,
+    setEditYoutube,
+} from './redux/features/sidebarSlice';
+
 import { AIWriteMenu } from './ai-text';
-// import { VideosSection } from './sections/video-section';
-// import { UploadSection } from './sections/upload-section';
 
 import { useProject } from './project';
 
@@ -36,6 +45,7 @@ import ru from './translations/ru';
 import ptBr from './translations/pt-br';
 
 import Topbar from './topbar/topbar';
+import { WidgetSection } from './sections/widgets';
 
 // load default translations
 setTranslations(en);
@@ -45,7 +55,7 @@ DEFAULT_SECTIONS.splice(3, 1, ShapesSection);
 // add icons
 DEFAULT_SECTIONS.splice(3, 0, IconsSection);
 // add two more sections
-DEFAULT_SECTIONS.push(QuotesSection, QrSection,TickerSection);
+DEFAULT_SECTIONS.push(QuotesSection,MediaSection,WidgetSection);
 // DEFAULT_SECTIONS.unshift(UploadSection);
 DEFAULT_SECTIONS.unshift(MyDesignsSection);
 
@@ -98,6 +108,23 @@ const useHeight = () => {
 const App = observer(({ store }) => {
   const project = useProject();
   const height = useHeight();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    const json = store.selectedElements[0]?.toJSON();
+    const htmlString = json?.html;
+
+    if(htmlString?.includes('id="ticker"')){
+      dispatch(setEditTicker(true));
+      store.openSidePanel('apps');
+    }else if (json?.type === "html" && !htmlString?.includes('id="ticker"')){
+      dispatch(setEditEmbed(true));
+      store.openSidePanel('apps');
+    }else{
+      dispatch(setEditTicker(false));
+      dispatch(setEditEmbed(false));
+    }
+  },[dispatch,store.selectedElements[0]]);
 
   React.useEffect(() => {
     if (project.language.startsWith('fr')) {
